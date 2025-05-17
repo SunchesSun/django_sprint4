@@ -6,7 +6,8 @@ from .models import Comments, Post
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name') 
+        fields = ('username', 'email', 'first_name', 'last_name')
+
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -15,6 +16,7 @@ class PostForm(forms.ModelForm):
         widgets = {
             'pub_date': forms.DateInput(attrs={'type': 'datetime-local'})
         }
+
 
 class CommentForm(forms.ModelForm):
     class Meta:
