@@ -76,7 +76,7 @@ class ProfileView(CustomListMixin, ListView):
                 .get_queryset()
                 .filter(
                     is_published=True, category__is_published=True,
-                      author=self.author
+                    author=self.author
                 )
             )
         return super().get_queryset().filter(author=self.author)
@@ -183,13 +183,16 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        form.instance.post = get_object_or_404(Post,
-                                        pk=self.kwargs.get("post_id"))
+        form.instance.post = get_object_or_404(
+            Post,
+            pk=self.kwargs.get("post_id"))
         return super().form_valid(form)
 
     def get_success_url(self) -> str:
-        return reverse("blog:post_detail",
-                        kwargs={"pk": self.kwargs.get("post_id")})
+        return reverse(
+            "blog:post_detail",
+            kwargs={"pk": self.kwargs.get("post_id")}
+        )
 
 
 class CommentUpdateView(LoginRequiredMixin, CommentChangeMixin, UpdateView):
